@@ -1,0 +1,28 @@
+apiVersion: kobe.semagrow.org/v1alpha1
+kind: Benchmark
+metadata:
+  name: geographica-rw
+spec:
+  datasets:
+    - name: gg2rw
+      files:
+        - url: https://users.iit.demokritos.gr/~antru/dumps/geographica2/gg2-rw.tar.gz
+      templateRef: strabontemplate
+  queries:
+    - name: GGRWQ-28
+      language: sparql
+      queryString: 'PREFIX strdf: <http://strdf.di.uoa.gr/ontology#> 
+
+      SELECT (strdf:extent(?o1) AS ?ret)
+      WHERE {  
+        ?s1 <http://geo.linkedopendata.gr/gag/ontology/asWKT> ?o1 .
+      }'
+
+    - name: GGRWQ-29
+      language: sparql
+      queryString: 'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> 
+
+      SELECT (geof:union(?o1) AS ?ret) 
+      WHERE {  
+        ?s1 <http://geo.linkedopendata.gr/gag/ontology/asWKT> ?o1 .
+      }'

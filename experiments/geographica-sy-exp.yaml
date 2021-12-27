@@ -1,0 +1,13 @@
+apiVersion: kobe.semagrow.org/v1alpha1
+kind: Experiment
+metadata:
+  name: geographica-sy-exp
+spec:
+  benchmark: geographica-sy
+  federatorName: uno-synth
+  federatorTemplateRef: unotemplate
+  evaluator:
+    image: semagrow/kobe-sequential-evaluator
+  timesToRun: 3
+  dryRun: false
+  forceNewInit: false

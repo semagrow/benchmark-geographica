@@ -1,0 +1,121 @@
+apiVersion: kobe.semagrow.org/v1alpha1
+kind: Benchmark
+metadata:
+  name: geographica-rw
+spec:
+  datasets:
+    - name: gg2rw
+      files:
+        - url: https://users.iit.demokritos.gr/~antru/dumps/geographica2/gg2-rw.tar.gz
+      templateRef: strabontemplate
+  queries:
+    - name: GGRWQ-18
+      language: sparql
+      queryString: 'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> 
+
+      SELECT ?s1 ?s2
+      WHERE { 
+        ?s1 <http://www.geonames.org/ontology#asWKT> ?o1 .
+        ?s2 <http://dbpedia.org/property/asWKT> ?o2 .
+        FILTER(geof:sfEquals(?o1, ?o2)).  
+      }'
+
+    - name: GGRWQ-19
+      language: sparql
+      queryString: 'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> 
+
+      SELECT ?s1 ?s2 
+      WHERE { 
+        ?s1 <http://www.geonames.org/ontology#asWKT> ?o1 .
+        ?s2 <http://linkedgeodata.org/ontology/asWKT> ?o2 .
+        FILTER(geof:sfIntersects(?o1, ?o2)).  
+      }'
+
+    - name: GGRWQ-20
+      language: sparql
+      queryString: 'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> 
+
+      SELECT ?s1 ?s2 
+      WHERE { 
+        ?s1 <http://www.geonames.org/ontology#asWKT> ?o1 .
+        ?s2 <http://geo.linkedopendata.gr/gag/ontology/asWKT> ?o2 .
+        FILTER(geof:sfIntersects(?o1, ?o2)).  
+      }'
+
+    - name: GGRWQ-21
+      language: sparql
+      queryString: 'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> 
+
+      SELECT ?s1 ?s2 
+      WHERE { 
+        ?s1 <http://linkedgeodata.org/ontology/asWKT> ?o1 .
+        ?s2 <http://geo.linkedopendata.gr/gag/ontology/asWKT> ?o2 .
+        FILTER(geof:sfIntersects(?o1, ?o2)).  
+      }'
+
+    - name: GGRWQ-22
+      language: sparql
+      queryString: 'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> 
+
+      SELECT ?s1 ?s2 
+      WHERE { 
+        ?s1 <http://www.geonames.org/ontology#asWKT> ?o1 .
+        ?s2 <http://geo.linkedopendata.gr/gag/ontology/asWKT> ?o2 .
+        FILTER(geof:sfWithin(?o1, ?o2)).  
+      }'
+
+    - name: GGRWQ-23
+      language: sparql
+      queryString: 'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> 
+
+      SELECT ?s1 ?s2
+      WHERE { 
+        ?s1 <http://linkedgeodata.org/ontology/asWKT> ?o1 .
+        ?s2 <http://geo.linkedopendata.gr/gag/ontology/asWKT> ?o2 .
+        FILTER(geof:sfWithin(?o1, ?o2)).  
+      }'
+
+    - name: GGRWQ-24
+      language: sparql
+      queryString: 'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> 
+
+      SELECT ?s1 ?s2
+      WHERE { 
+        ?s1 <http://geo.linkedopendata.gr/corine/ontology#asWKT> ?o1 .
+        ?s2 <http://geo.linkedopendata.gr/gag/ontology/asWKT> ?o2 .
+        FILTER(geof:sfWithin(?o1, ?o2)).  
+      }'
+
+    - name: GGRWQ-25
+      language: sparql
+      queryString: 'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> 
+
+      SELECT ?s1 ?s2
+      WHERE { 
+        ?s1 <http://linkedgeodata.org/ontology/asWKT> ?o1 .
+        ?s2 <http://geo.linkedopendata.gr/gag/ontology/asWKT> ?o2 .
+        FILTER(geof:sfCrosses(?o1, ?o2)).  
+      }'
+
+    - name: GGRWQ-26
+      language: sparql
+      queryString: 'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> 
+
+      SELECT ?s1 ?s2 
+      WHERE { 
+        ?s1 <http://geo.linkedopendata.gr/gag/ontology/asWKT> ?o1 .
+        ?s2 <http://geo.linkedopendata.gr/gag/ontology/asWKT> ?o2 .
+        FILTER(?s1 != ?s2).  
+        FILTER(geof:sfTouches(?o1, ?o2)).  
+      }'
+
+    - name: GGRWQ-27
+      language: sparql
+      queryString: 'PREFIX geof: <http://www.opengis.net/def/function/geosparql/> 
+
+      SELECT ?s1 ?s2 
+      WHERE { 
+        ?s1 <http://geo.linkedopendata.gr/gag/ontology/asWKT> ?o1 .
+        ?s2 <http://geo.linkedopendata.gr/corine/ontology#asWKT> ?o2 .
+        FILTER(geof:sfOverlaps(?o1, ?o2)).  
+      }'
